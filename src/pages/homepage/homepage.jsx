@@ -1,11 +1,12 @@
 import React from "react";
 
-import ButtonAppBar from "../../components/navbar/navbar.jsx"
 
+import bImage from "../../images/l&q.jpg";
 
 const Homepage = () => (
   <div >
-  <ButtonAppBar />
+  <img src={bImage} alt="l&q shoes" ></img>
+
   </div>
 );
 
