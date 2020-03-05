@@ -1,4 +1,4 @@
-import React, {useState, useEffect,useRef} from "react";
+import React, { useState, useEffect} from "react";
 import "./App.css";
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
@@ -7,39 +7,45 @@ import Homepage from "./pages/homepage/homepage.jsx";
 import ButtonAppBar from "./components/navbar/navbar.jsx";
 import registrationLogin from "./components/registration-login/registration-login.jsx";
 
-import {auth} from './firebase/firebase.utils';
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
-function App() {
+const App = () => {
+  const [currentUser, setUser] = useState({
+    curUser: null
+  });
 
-const [currentUser, setUser] = useState({
-  curUser: null
-});
+  useEffect(() => {
+    const unsubscribeFromAuth = auth.onAuthStateChanged(
+      async userAuth => {
+        if (userAuth) {
+          const userRef = await createUserProfileDocument(userAuth);
+          userRef.onSnapshot(snapShot => {
+            setUser({
+              id: snapShot.id,
+              ...snapShot.data()
+            });
+          });
+        } else {
+          setUser({ curUser: userAuth });
+        }
+      });
 
-const unsubscribeFromAuth = useRef(null);
-
-useEffect( () => {
-
-return unsubscribeFromAuth.current = auth.onAuthStateChanged(user => {
-  setUser({curUser: user});
-
-});
-
-}, [] );
+      return () => {
+        unsubscribeFromAuth();
+      };
+  }, []);
 
   return (
     <div>
-      <ButtonAppBar currentUser ={currentUser}/>
+      <ButtonAppBar currentUser={currentUser} />
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Homepage} />
           <Route path="/registration-login" component={registrationLogin} />
-          
         </Switch>
       </BrowserRouter>
     </div>
   );
-
-
 }
 
 export default App;

@@ -7,7 +7,6 @@ import Button from "@material-ui/core/Button";
 import { Link } from "@material-ui/core/";
 import {MemoryRouter as Router} from 'react-router-dom';
 import {Link as RouterLink } from 'react-router-dom';
-import {withRouter } from 'react-router-dom';
 
 import {auth} from '../../firebase/firebase.utils';
 
@@ -28,35 +27,29 @@ const useStyles = makeStyles(theme => ({
 // eslint-disable-next-line react/prop-types
 export default function ButtonAppBar({currentUser}) {
   const classes = useStyles();
-
-  console.log();
+  const {curUser} = currentUser;
   return (
       <Router>
     <div className={classes.root}>
-      <AppBar color='white' position="fixed">
+      <AppBar color='primary' position="fixed">
         <Toolbar >
           <Link component={RouterLink} to="/" color="inherit" underline="none">
             <h2> L&Q Shoes </h2>
           </Link>
           <Typography align="center" variant="h6" className={classes.title}>
-            <Link component={RouterLink} to="/"  color="inherit" underline="none">
+            <Link component={RouterLink} to="/"  className={classes.links} color="inherit" underline="none">
               Men
             </Link>
-            <Link component={RouterLink} to="/"  color="inherit" underline="none">
+            <Link component={RouterLink} to="/"  className={classes.links} color="inherit" underline="none">
               Women
             </Link>
             <Link component={RouterLink} to="/acessories" color="inherit" underline="none">
               Accessories
             </Link>
           </Typography>
-            {currentUser.curUser ? 
-            <div>
-            <Button onClick={() => auth.signOut()} color="inherit">Log Out</Button>
-
-            </div>
-            :
-            <Button component={RouterLink} to="/registration-login" color="inherit">Login</Button>
-
+            {curUser !== null ? 
+           (<Button onClick={() => auth.signOut()} color="inherit">Log Out</Button>) :
+            (<Button component={RouterLink} to="/registration-login" color="inherit">Login</Button>)
             }
         </Toolbar>
       </AppBar>
