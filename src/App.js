@@ -37,8 +37,9 @@ const App = () => {
 
   return (
     <div>
-      <ButtonAppBar currentUser={currentUser} />
       <BrowserRouter>
+      <ButtonAppBar currentUser={currentUser} />
+
         <Switch>
           <Route exact path="/" component={Homepage} />
           <Route path="/registration-login" component={registrationLogin} />

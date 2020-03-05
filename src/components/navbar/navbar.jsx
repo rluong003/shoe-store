@@ -5,7 +5,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Link } from "@material-ui/core/";
-import {MemoryRouter as Router} from 'react-router-dom';
 import {Link as RouterLink } from 'react-router-dom';
 
 import {auth} from '../../firebase/firebase.utils';
@@ -29,7 +28,6 @@ export default function ButtonAppBar({currentUser}) {
   const classes = useStyles();
   const {curUser} = currentUser;
   return (
-      <Router>
     <div className={classes.root}>
       <AppBar color='primary' position="fixed">
         <Toolbar >
@@ -54,6 +52,5 @@ export default function ButtonAppBar({currentUser}) {
         </Toolbar>
       </AppBar>
     </div>
-    </Router>
   );
 }

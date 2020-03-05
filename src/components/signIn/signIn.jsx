@@ -52,6 +52,7 @@ function handleChange(event){
 
 const handleSubmit = async event => {
   event.preventDefault();
+
   const {email, password} = login;
   try{
      await auth.signInWithEmailAndPassword(email,password);
@@ -82,6 +83,7 @@ const handleSubmit = async event => {
             label="Email Address"
             name="email"
             autoComplete="email"
+            value={login.email}
             autoFocus
             onChange={handleChange}
           />
@@ -90,6 +92,7 @@ const handleSubmit = async event => {
             margin="normal"
             required
             fullWidth
+            value={login.password}
             name="password"
             label="Password"
             type="password"

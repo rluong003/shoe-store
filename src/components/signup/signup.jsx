@@ -84,6 +84,7 @@ export default function SignUp() {
                 fullWidth
                 id="displayName"
                 label="Full Name"
+                value={userCred.displayName}
                 name="displayName"
                 autoComplete="displayName"
                 onChange={handleChange}
@@ -95,6 +96,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="email"
+                value={userCred.email}
                 label="Email Address"
                 name="email"
                 autoComplete="email"
@@ -105,6 +107,7 @@ export default function SignUp() {
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
+                value={userCred.password}
                 required
                 fullWidth
                 name="password"
