@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Link } from "@material-ui/core/";
 import {Link as RouterLink } from 'react-router-dom';
+import {connect} from 'react-redux';
 
 import {auth} from '../../firebase/firebase.utils';
 
@@ -23,10 +24,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const mapStateToProps = state => ({
+  curUser: state.user.curUser
+})
+
 // eslint-disable-next-line react/prop-types
-export default function ButtonAppBar({currentUser}) {
+function ButtonAppBar({curUser}) {
   const classes = useStyles();
-  const {curUser} = currentUser;
   return (
     <div className={classes.root}>
       <AppBar color='primary' position="fixed">
@@ -54,3 +58,4 @@ export default function ButtonAppBar({currentUser}) {
     </div>
   );
 }
+export default connect(mapStateToProps)(ButtonAppBar); 
