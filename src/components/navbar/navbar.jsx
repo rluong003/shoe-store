@@ -9,7 +9,8 @@ import {Link as RouterLink } from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import {auth} from '../../firebase/firebase.utils';
-
+import CartIcon from '../cartIcon/cartIcon';
+import CartDropdown from '../cart-dropdown/cart-dropdown';
 // eslint-disable-next-line no-unused-vars
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,12 +25,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const mapStateToProps = state => ({
-  curUser: state.user.curUser
-})
+const mapStateToProps = ({user: {curUser}, cart: {hidden }}) => ({
+  curUser,
+  hidden
+});
 
 // eslint-disable-next-line react/prop-types
-function ButtonAppBar({curUser}) {
+function ButtonAppBar({curUser, hidden}) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -53,7 +55,9 @@ function ButtonAppBar({curUser}) {
            (<Button onClick={() => auth.signOut()} color="inherit">Log Out</Button>) :
             (<Button component={RouterLink} to="/registration-login" color="inherit">Login</Button>)
             }
+            <CartIcon />
         </Toolbar>
+        { hidden ? null: <CartDropdown/> }
       </AppBar>
     </div>
   );
