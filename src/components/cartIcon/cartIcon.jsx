@@ -5,20 +5,27 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import IconButton from "@material-ui/core/IconButton";
 
 import { toggleCartHidden } from "../../redux/cart/cart.actions";
+import { createStructuredSelector } from "reselect";
+import { selectCartItemsCount } from "../../redux/cart/cart.selectors";
 
-const CartIcon = ({ toggleCartHidden }) => {
+// eslint-disable-next-line react/prop-types
+const CartIcon = ({ toggleCartHidden, itemCount }) => {
   return (
     <div onClick={toggleCartHidden}>
       <IconButton>
         <ShoppingCartIcon />
-        <span> 0</span>
+        <span> {itemCount} </span>
       </IconButton>
     </div>
   );
 };
 
+const mapStateToProps = createStructuredSelector({
+  itemCount: selectCartItemsCount
+});
+
 const mapDispatchToProps = dispatch => ({
   toggleCartHidden: () => dispatch(toggleCartHidden())
 });
 
-export default connect(null, mapDispatchToProps)(CartIcon);
+export default connect(mapStateToProps, mapDispatchToProps)(CartIcon);
