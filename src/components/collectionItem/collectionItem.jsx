@@ -1,41 +1,49 @@
 /* eslint-disable react/prop-types */
 
-import React from 'react';
+import React from "react";
 
-import './collection-item.styles.scss';
+import "./collection-item.styles.scss";
 
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
 
-import {connect} from 'react-redux';
-import {addItem} from '../../redux/cart/cart.actions';
+import { Link } from "react-router-dom";
 
-function CollectionItem ( { item, addItem }) {
+import { connect } from "react-redux";
+import { addItem } from "../../redux/cart/cart.actions";
 
-  const { name,price,imageUrl } = item;
+function CollectionItem({ item, addItem }) {
+  const { name, price, imageUrl, id } = item;
+  const itempath = "/shop/" + id;
   return (
-    <div className='collection-item'>
-    <div
-      className='image'
-      style={{
-        backgroundImage: `url(${imageUrl})`
-      }}
-    />
-    <div className='collection-footer'>
-      <span className='name'>{name}</span>
-      <span className='price'>${price}</span>
-    </div>
-    <Button onClick={() => addItem(item)} className="custom-button" variant="contained" >
+    <div className="collection-item">
+      <Link
+        style={{
+          backgroundImage: `url(${imageUrl})`
+        }}
+        className="image"
+        to={itempath}
+      >
+        
+      </Link>
+
+      <div className="collection-footer">
+        <span className="name">{name}</span>
+        <span className="price">${price}</span>
+      </div>
+
+      <Button
+        onClick={() => addItem(item)}
+        className="custom-button"
+        variant="contained"
+      >
         ADD TO CART
       </Button>
-  </div>
+    </div>
   );
-  
+}
 
-  }
-
-
-  const mapDispatchToProps = dispatch => ({
-    addItem: item => dispatch(addItem(item))
-  });
+const mapDispatchToProps = dispatch => ({
+  addItem: item => dispatch(addItem(item))
+});
 
 export default connect(null, mapDispatchToProps)(CollectionItem);

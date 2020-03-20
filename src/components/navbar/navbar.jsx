@@ -38,7 +38,7 @@ function ButtonAppBar({ curUser, hidden }) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <AppBar color="primary" position="sticky">
+      <AppBar color="transparent" position="sticky">
         <Toolbar>
           <Link component={RouterLink} to="/" color="inherit" underline="none">
             <h2> L&Q Shoes </h2>

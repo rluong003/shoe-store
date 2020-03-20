@@ -1,0 +1,18 @@
+.product {
+    display: flex;
+    
+    
+  
+    image {
+      width: 75vw;
+      height: 75vw;
+     
+    }
+  
+    .product-option {
+      display: flex;
+      width: 25vw;
+      flex-wrap: wrap;
+
+    }
+  }

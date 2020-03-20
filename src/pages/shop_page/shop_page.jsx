@@ -1,23 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
+import {Route} from 'react-router-dom';
 
-import SHOP_DATA from "./shop.data.js";
-
-import CollectionItem from "../../components/collectionItem/collectionItem.jsx";
+import ProductPage from "../../components/product-page/product-page.jsx";
+import ItemPage from '../item-page/item-page.jsx';
 
 import './shop_page.styles.scss';
-function ShopPage() {
-  const [collection, setCollections] = useState({ shoes: SHOP_DATA });
+function ShopPage({match}) {
+
 
   return (
     <div className='collection-preview'>
-      <h1 className='title'> {collection.shoes.title} </h1>
-      <div className='preview'>
-        {collection.shoes.items.map( item => (
-          <CollectionItem key={item.id} item={item} />
-        ))}
-      </div>
+    <Route exact path ={`${match.path}`} component={ProductPage}     />
+    <Route path = {`${match.path}/:itemId`} component={ItemPage} />
     </div>
   );
 }
 
-export default ShopPage;
+
+export default (ShopPage);
