@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 
 import { connect } from "react-redux";
@@ -12,7 +13,7 @@ function ItemPage({ item, addItem }) {
   return (
     <div className='product'>
       
-      <img src={item.imageUrl} />
+      <img alt="product image" src={item.imageUrl} />
       <div className="product-options">
       <h2> {item.name} </h2>
       <Button
